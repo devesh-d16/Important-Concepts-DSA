@@ -36,3 +36,39 @@ public static int lenOfLongSubarr (int A[], int N, int K) {
     }  
     return maxLength;
 }
+
+
+// for positive only optimal approach using two pointer
+    public static int lenOfLongSubarr (int A[], int N, int K) {
+        
+        int left = 0;
+        int right = 0;
+        
+        int sum = A[0];
+        int maxLength = 0;
+        
+        while(right < N){
+
+            // if the sum > k, reduce the array from left
+            // so that it will be equal to or less than K
+            // left++ bhi krna hai
+            while(left <= right && sum > K){
+                sum = sum - A[left];
+                left++;
+            }
+
+            // sum ke equal aagya toh maxLength update krna hai
+            if(sum == K){
+                maxLength = Math.max(maxLength, right - left + 1);
+            }
+
+            // right pointer ko ++ krna hai 
+            // and sum me next selement add krna hai
+            right++;
+            if(right < N){
+                sum += A[right];
+            }
+        }
+        
+        return maxLength;
+    }
