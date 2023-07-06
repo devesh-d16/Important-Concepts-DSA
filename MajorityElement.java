@@ -67,3 +67,86 @@
 
         return -1;
     }
+// Majority Element 2
+// Given an array nums of size n, return the majority element.
+// The majority element is the element that appears more than ⌊n / 3⌋ times. 
+// You may assume that the majority element always exists in the array.
+
+// TC - O(n^2)
+// SC - O(N)
+
+    public List<Integer> majorityElement(int[] nums) {
+        int n = nums.length;
+        List<Integer> ans = new ArrayList<>();
+
+        HashMap<Integer, Integer> map = new HashMap<>();
+        for(int i = 0; i < n; i++){
+            // if key/element phle se hai toh key ka value store krega or new hai toh 0 
+            int val = map.getOrDefault(nums[i],0);
+            // value me + 1 because frequency ek increase hogyi hai
+            map.put(nums[i], val + 1);
+        }
+
+        for(Map.Entry<Integer, Integer> i : map.entrySet()){
+            if(i.getValue() > (n/3)){
+                ans.add(i.getKey());
+            }
+        }
+        return ans;
+    }
+
+// TC - O(N) + O(N)
+// SC - O(1)
+    public List<Integer> majorityElement(int[] nums) {
+        int n = nums.length;
+        
+        int count1 = 0;
+        int count2 = 0;
+
+        int element1 = Integer.MIN_VALUE;
+        int element2 = Integer.MIN_VALUE;
+
+        for(int i = 0; i < n; i++){
+            if(count1 == 0 && nums[i] != element2){
+                count1 = 1;
+                element1 = nums[i];
+            }
+            else if(count2 == 0 && nums[i] != element1){
+                count2 = 1;
+                element2 = nums[i];
+            }
+            else if(nums[i] == element1){
+                count1++;
+            }            
+            else if(nums[i] == element2){
+                count2++;
+            }
+            else{
+                count1--;
+                count2--;
+            }
+        }
+
+        List<Integer> ans = new ArrayList<>();
+
+        count1 = 0;
+        count2 = 0;
+
+        for(int i = 0; i < n; i++){
+            if(nums[i] == element1){
+                count1++;
+            }
+            else if(nums[i] == element2){
+                count2++;
+            }
+        }
+
+        if(count1 > (n/3)){
+            ans.add(element1);
+        }
+        if(count2 > (n/3)){
+            ans.add(element2);
+        }
+
+        return ans;
+    }
