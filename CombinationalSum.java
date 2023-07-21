@@ -42,3 +42,29 @@ public List<List<Integer>> combinationSum(int[] candidates, int target) {
       // here if same element se target sum achieve noi hua toh idx increase krenge
         cS(idx + 1, cand, target, ans, a);
     }
+
+
+// Find all valid combinations of k numbers that sum up to n such that the following conditions are true:
+// Only numbers 1 through 9 are used.
+// Each number is used at most once.
+// Return a list of all possible valid combinations. 
+// The list must not contain the same combination twice, and the combinations may be returned in any order.
+        
+    public List<List<Integer>> combinationSum3(int k, int n) {
+        List<List<Integer>> ans = new ArrayList<>();
+        cS(ans, new ArrayList<>(), k, 1, n);
+        return ans;
+    }
+
+    public void cS(List<List<Integer>> ans, List<Integer> a, int k, int i, int n){
+        if(a.size() == k && n == 0){
+            ans.add(new ArrayList<>(a));
+            return;
+        }
+      
+        for(int j = i; j <= 9; j++){
+            a.add(j);
+            cS(ans, a, k, j + 1, n - j);
+            a.remove(a.size() - 1);
+        }
+    }
