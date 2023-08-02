@@ -52,3 +52,40 @@
     }
 
 // DFS
+    public class Pair{
+        int first;
+        int second;
+        
+        public Pair(int first, int second){
+            this.first = first;
+            this.second = second;
+        }
+    }
+
+    public boolean isCycle(int V, ArrayList<ArrayList<Integer>> adj) {
+        boolean vis[] = new boolean[V];
+        for(int i = 0; i < V; i++){
+            if(vis[i] == false){
+                if(dfs(i, -1, vis, adj) == true){
+                    return true;
+                }
+            }
+        }
+        return false;
+    }
+    
+    public boolean dfs(int i, int parent, boolean vis[], ArrayList<ArrayList<Integer>> adj){
+        vis[i] = true;
+        
+        for(int adjNode : adj.get(i)){
+            if(vis[adjNode] == false){
+                if(dfs(adjNode, i, vis, adj) == true){
+                    return true;
+                }
+            }
+            else if(adjNode != parent){
+                return true;
+            }
+        }
+        return false;
+    }
