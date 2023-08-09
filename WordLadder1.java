@@ -50,6 +50,7 @@ public class Pair{
                 return steps;
             }
 
+            // N * Word.length * 26
             for(int i = 0; i < word.length(); i++){
                 for(char ch = 'a'; ch <= 'z'; ch++){
                     char replaceCharArray[] = word.toCharArray();
