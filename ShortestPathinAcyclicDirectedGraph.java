@@ -26,6 +26,7 @@ public class Pair{
     }
 
 	public int[] shortestPath(int N,int M, int[][] edges) {
+		// make a graph
 		ArrayList<ArrayList<Pair>> adj = new ArrayList<>();
 		for(int i = 0; i < N; i++){
 		    ArrayList<Pair> temp = new ArrayList<>();
@@ -38,7 +39,9 @@ public class Pair{
 		    int w = edges[i][2];
 		    adj.get(u).add(new Pair(v, w));
 		}
-		
+
+		// find the topo sort
+		// O(M + N)
 		int vis[] = new int[N];
 		Stack<Integer> st = new Stack<>();
 		for(int i = 0; i < N; i++){
@@ -46,7 +49,9 @@ public class Pair{
 		        topoSort(i, adj, vis, st);
 		    }
 		}
-		
+
+		// edge relaxation
+		// find the distance from the source
 		int dist[] = new int[N];
 		for(int i = 0; i < N; i++){
 		    dist[i] = (int)1e9;
