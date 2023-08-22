@@ -6,7 +6,7 @@
 // in this quesion we will apply the same logic like the last one
 // as one thing we know that if the first element is taken -> last element is not taken and vice versa
 // so we will make to two temporary array, first with NO last element and other with NO first element
-// and apply the same logic of pick and non pick
+// and apply the same logic of pick and non pick 
 public int rob(int[] nums) {
     int n = nums.length;
     int num1[] = new int[n - 1];
