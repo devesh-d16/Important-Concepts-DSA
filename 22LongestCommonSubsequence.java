@@ -52,7 +52,7 @@ public int lcs(int idx1, int idx2, String s1, String s2, int dp[][]){
         return dp[idx1][idx2] = (0 + Math.max(lcs(idx1 - 1, idx2, s1, s2, dp), lcs(idx1, idx2 - 1, s1, s2, dp)));
     }
 }
-
+    
 // Tabulation
 public int longestCommonSubsequence(String s, String t) {
     int m = s.length();
@@ -79,6 +79,28 @@ public int longestCommonSubsequence(String s, String t) {
     return dp[m][n];
 }
 
+// To print the subsequence
+int len = dp[m][n];
+StringBuilder sb = new StringBuilder("");
+
+int i = m;
+int j = n;
+while(i > 0 && j > 0){
+    if(s.charAt(i - 1) == t.charAt(j - 1)){
+        sb.append(s.charAt(i - 1));
+        i--;
+        j--;
+    }
+    else if(dp[i - 1][j] > dp[i][j - 1]){
+        i--;
+    }
+    else{
+        j--;
+    }
+}
+Collection.reverse(sb);
+System.out.println(sb);
+
 // Space Optimization
 public int longestCommonSubsequence(String s, String t) {
     int m = s.length();
@@ -103,3 +125,4 @@ public int longestCommonSubsequence(String s, String t) {
     }
     return prev[n];
 }
+
